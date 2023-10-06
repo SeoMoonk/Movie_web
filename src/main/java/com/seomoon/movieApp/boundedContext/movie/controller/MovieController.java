@@ -5,6 +5,7 @@ import com.seomoon.movieApp.boundedContext.movie.model.entity.Movie;
 import com.seomoon.movieApp.boundedContext.movie.service.MovieService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,12 +31,14 @@ public class MovieController {
     }
 
     @GetMapping("/add")
+    @PreAuthorize("hasAuthority('admin')")
     public String getAddMovieForm(MovieForm movieForm) {
 
         return "view/movie/movieAddForm";
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('admin')")
     public String addMovie(@Valid MovieForm movieForm,
                            BindingResult bindingResult) {
 
@@ -59,6 +62,7 @@ public class MovieController {
     }
 
     @GetMapping("/modify")
+    @PreAuthorize("hasAuthority('admin')")
     public String getModifyForm(@RequestParam(value="id") Long movieId, Model model,
                                 MovieForm movieForm) {
 
@@ -70,6 +74,7 @@ public class MovieController {
     }
 
     @PostMapping("/modify")
+    @PreAuthorize("hasAuthority('admin')")
     public String modifyMovie(@RequestParam(value="id") Long movieId,
                               @Valid MovieForm movieForm, BindingResult bindingResult) {
 
@@ -81,6 +86,7 @@ public class MovieController {
     }
 
     @GetMapping("/remove")
+    @PreAuthorize("hasAuthority('admin')")
     public String removeMovie(@RequestParam(value="id") Long movieId) {
 
         movieService.removeMovie(movieId);
