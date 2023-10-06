@@ -80,4 +80,12 @@ public class MovieController {
         return "redirect:/movie/detail?id=" + movieId;
     }
 
+    @GetMapping("/remove")
+    public String removeMovie(@RequestParam(value="id") Long movieId) {
+
+        movieService.removeMovie(movieId);
+
+        return "redirect:/movie/list";
+    }
+
 }

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -104,6 +105,17 @@ public class MovieService {
         resultMap.put("msg", msg);
 
         return resultMap;
+    }
+
+    @Transactional
+    public void removeMovie(Long targetId) {
+
+        Optional<Movie> byId = movieRepository.findById(targetId);
+
+        if(byId.isPresent()){
+            movieRepository.delete(byId.get());
+        }
+
     }
 
 }
