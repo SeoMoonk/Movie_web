@@ -25,6 +25,6 @@ public class Rating extends BaseEntity {
 
     private Long score;
 
-    private String ratingSummary;
+    private String review;
 
 }
