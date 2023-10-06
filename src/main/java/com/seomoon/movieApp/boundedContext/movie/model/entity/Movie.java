@@ -1,4 +1,4 @@
-package com.seomoon.movieApp.boundedContext.movie.entity;
+package com.seomoon.movieApp.boundedContext.movie.model.entity;
 
 
 import com.seomoon.movieApp.base.entity.BaseEntity;

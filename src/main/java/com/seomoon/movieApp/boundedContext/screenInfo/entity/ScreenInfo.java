@@ -2,7 +2,7 @@ package com.seomoon.movieApp.boundedContext.screenInfo.entity;
 
 import com.seomoon.movieApp.base.entity.BaseEntity;
 import com.seomoon.movieApp.boundedContext.cinema.entity.Cinema;
-import com.seomoon.movieApp.boundedContext.movie.entity.Movie;
+import com.seomoon.movieApp.boundedContext.movie.model.entity.Movie;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;

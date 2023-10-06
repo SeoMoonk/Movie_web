@@ -1,11 +1,14 @@
 package com.seomoon.movieApp.boundedContext.movie.controller;
 
-import com.seomoon.movieApp.boundedContext.movie.entity.Movie;
+import com.seomoon.movieApp.boundedContext.movie.model.MovieAddForm;
+import com.seomoon.movieApp.boundedContext.movie.model.entity.Movie;
 import com.seomoon.movieApp.boundedContext.movie.service.MovieService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,15 +33,20 @@ public class MovieController {
     }
 
     @GetMapping("/add")
-    @PreAuthorize("hasAuthority('admin')")
-    public String getAddMovieForm() {
+    public String getAddMovieForm(MovieAddForm movieAddForm) {
 
-        return "/view/movie/addMovieForm";
+        return "view/movie/movieAddForm";
     }
 
     @PostMapping("/add")
-    @PreAuthorize("hasAuthority('admin')")
-    public String addMovie() {
+    public String addMovie(@Valid MovieAddForm movieAddForm,
+                           BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "view/movie/movieAddForm";
+        }
+
+        movieService.addMovie(movieAddForm);
 
         return "redirect:/movie/list";
     }
