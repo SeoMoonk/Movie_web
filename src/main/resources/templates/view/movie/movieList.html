@@ -22,8 +22,25 @@
         </div>
 
         <div th:unless="${#lists.isEmpty(movieList)}">
-            <div th:each="movie:${movieList}">
-                <a th:href="|/movie/detail?id=${movie.id}|" th:text="${movie.title}"> </a>
+            <div class="flex justify-center my-10">
+                <p class="font-sans text-3xl font-bold">영화 리스트</p>
+            </div>
+            <div class="ml-10 mb-10 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-[50px]">
+                <div class="card w-72 bg-base-100 shadow-xl" th:each="movie:${movieList}">
+                    <figure class="w-72 h-48">
+                        <a th:href="|/movie/detail?id=${movie.id}|">
+                            <img src="https://kr.object.ncloudstorage.com/calocheck/sample/sample_img_no.png" alt="movieImage"/>
+                        </a>
+                    </figure>
+                    <div class="divider"></div>
+                    <div class="card-body">
+                        <h2 class="card-title" th:text="${movie.title}"></h2>
+                        <p th:text="${movie.summary}"></p>
+                    </div>
+                    <div class="card-actions justify-center mb-4">
+                        <h1 th:text="${movie.grade.getGrade()}"></h1>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
