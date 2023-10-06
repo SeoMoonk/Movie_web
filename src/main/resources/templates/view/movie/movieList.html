@@ -1,0 +1,25 @@
+<html xmlns:layout="" data-theme="corporate">
+<head>
+    <th:block th:replace="~{common/fragments/config :: ConfigFragment}"/>
+    <title>Main</title>
+</head>
+<body>
+<th:block th:replace="~{common/fragments/header :: HeaderFragment}"/>
+<main class="h-full w-full flex flex-col content-center justify-center">
+
+    <div class="flex justify-center">
+        <div th:if="${#lists.isEmpty(movieList)}">
+            <h1 class="bold text-2xl">아직 아무 영화도 없습니다!</h1>
+        </div>
+
+        <div th:unless="${#lists.isEmpty(movieList)}">
+            <div th:each="movie:${movieList}">
+                <h1 th:text="${movie.title}"> </h1>
+            </div>
+        </div>
+    </div>
+
+</main>
+<th:block th:replace="~{common/fragments/footer :: FooterFragment}"/>
+</body>
+</html>
