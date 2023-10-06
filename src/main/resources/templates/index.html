@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="" data-theme="corporate">
 <head>
-    <meta charset="UTF-8">
-    <title>Index Page</title>
+    <th:block th:replace="~{common/fragments/config :: ConfigFragment}"/>
+    <title>Main</title>
 </head>
 <body>
+<th:block th:replace="~{common/fragments/header :: HeaderFragment}"/>
+<main class="flex flex-col content-center justify-center">
 
-<h1>Hello Index!!</h1>
+    <h1> Hello Index!!</h1>
 
+</main>
+<th:block th:replace="~{common/fragments/footer :: FooterFragment}"/>
 </body>
 </html>

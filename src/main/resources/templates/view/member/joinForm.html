@@ -1,0 +1,50 @@
+<html xmlns:layout="" data-theme="corporate">
+<head>
+    <th:block th:replace="~{common/fragments/config :: ConfigFragment}"/>
+    <title>Main</title>
+</head>
+<body>
+<th:block th:replace="~{common/fragments/header :: HeaderFragment}"/>
+<main class="flex flex-col content-center justify-center">
+
+    <form class="flex flex-col justify-center items-center" method="POST" action="/member/join"
+          th:object="${memberJoinForm}">
+
+        <div class="flex flex-col mb-10">
+            <label for="username">사용할 ID : </label>
+            <input class="input input-bordered input-accent" type="text" id="username" name="username">
+        </div>
+
+        <div class="flex flex-col mb-10">
+            <label for="password1">사용할 PW : </label>
+            <input class="input input-bordered input-accent" type="password" id="password1"
+                   name="password1">
+        </div>
+
+        <div class="flex flex-col mb-10">
+            <label for="password2">PW 재확인 : </label>
+            <input class="input input-bordered input-accent" type="password" id="password2"
+                   name="password2">
+        </div>
+
+        <div class="flex flex-col mb-10">
+            <label for="nickname">사용할 닉네임 : </label>
+            <input class="input input-bordered input-accent" type="text" id="nickname" name="nickname">
+        </div>
+
+        <div class="flex">
+
+            <div class="flex justify-center mt-8 mb-8" th:if="${#fields.hasErrors()}">
+                <h5 id="error" th:text="${#fields.errors()}" class="error-text"></h5>
+            </div>
+
+            <button class="btn btn-info mx-6" type="submit">가입 완료</button>
+            <a class="btn btn-warning mx-6" href="/static">가입 취소</a>
+        </div>
+
+    </form>
+
+</main>
+<th:block th:replace="~{common/fragments/footer :: FooterFragment}"/>
+</body>
+</html>

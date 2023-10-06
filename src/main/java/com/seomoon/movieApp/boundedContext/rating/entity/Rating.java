@@ -1,7 +1,7 @@
 package com.seomoon.movieApp.boundedContext.rating.entity;
 
 import com.seomoon.movieApp.base.entity.BaseEntity;
-import com.seomoon.movieApp.boundedContext.member.entity.Member;
+import com.seomoon.movieApp.boundedContext.member.model.entity.Member;
 import com.seomoon.movieApp.boundedContext.movie.entity.Movie;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;

@@ -1,4 +1,4 @@
-package com.seomoon.movieApp.boundedContext.member.entity;
+package com.seomoon.movieApp.boundedContext.member.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

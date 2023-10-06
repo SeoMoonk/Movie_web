@@ -3,6 +3,8 @@ package com.seomoon.movieApp.boundedContext.movie.entity;
 
 import com.seomoon.movieApp.base.entity.BaseEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -20,6 +22,7 @@ public class Movie extends BaseEntity {
 
     private String summary;
 
+    @Enumerated(EnumType.STRING)
     private MovieGrade grade;
 
 }
