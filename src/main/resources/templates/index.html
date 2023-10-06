@@ -5,9 +5,12 @@
 </head>
 <body>
 <th:block th:replace="~{common/fragments/header :: HeaderFragment}"/>
-<main class="flex flex-col content-center justify-center">
+<main class="h-full w-full flex flex-col content-center justify-center">
 
-    <h1> Hello Index!!</h1>
+    <div class="flex justify-center gap-10">
+        <a class="btn btn-warning" href="/movie/list">영화 보러가기</a>
+        <a class="btn btn-primary" href="/cinema/list">극장 보러가기</a>
+    </div>
 
 </main>
 <th:block th:replace="~{common/fragments/footer :: FooterFragment}"/>
