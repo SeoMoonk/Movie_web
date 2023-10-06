@@ -1,6 +1,6 @@
 package com.seomoon.movieApp.boundedContext.movie.service;
 
-import com.seomoon.movieApp.boundedContext.movie.model.MovieAddForm;
+import com.seomoon.movieApp.boundedContext.movie.model.MovieForm;
 import com.seomoon.movieApp.boundedContext.movie.model.entity.Movie;
 import com.seomoon.movieApp.boundedContext.movie.model.entity.MovieGrade;
 import com.seomoon.movieApp.boundedContext.movie.repository.MovieRepository;
@@ -25,11 +25,11 @@ public class MovieService {
     }
 
     @Transactional
-    public Map<String, String> addMovie(MovieAddForm movieAddForm) {
+    public Map<String, String> addMovie(MovieForm movieForm) {
 
         Map<String,String> resultMap = new HashMap<>();
 
-        String validCode = checkValidAdd(movieAddForm);
+        String validCode = checkValidForm(movieForm);
 
         resultMap.put("Code", validCode);
 
@@ -39,9 +39,9 @@ public class MovieService {
             msg = "영화 등록에 실패하였습니다.";
         } else{
             Movie newMovie = Movie.builder()
-                    .title(movieAddForm.getTitle())
-                    .summary(movieAddForm.getSummary())
-                    .grade(MovieGrade.valueOf(movieAddForm.getGrade()))
+                    .title(movieForm.getTitle())
+                    .summary(movieForm.getSummary())
+                    .grade(MovieGrade.valueOf(movieForm.getGrade()))
                     .build();
 
             movieRepository.save(newMovie);
@@ -54,11 +54,11 @@ public class MovieService {
         return resultMap;
     }
 
-    public String checkValidAdd(MovieAddForm movieAddForm) {
+    public String checkValidForm(MovieForm movieForm) {
 
         String validCheckCode = null;
 
-        String title = movieAddForm.getTitle();
+        String title = movieForm.getTitle();
 
         if(movieRepository.findByTitle(title).isPresent()) {
             validCheckCode = "F-1";
@@ -73,6 +73,37 @@ public class MovieService {
 
         //FIXME isPresent()
         return movieRepository.findById(movieId).get();
+    }
+
+    @Transactional
+    public Map<String, String> modifyMovie(MovieForm movieForm, Movie targetMovie) {
+
+        Map<String,String> resultMap = new HashMap<>();
+
+        String validCode = checkValidForm(movieForm);
+
+        resultMap.put("Code", validCode);
+
+        String msg = null;
+
+        if(validCode.startsWith("F")){
+            msg = "영화 수정에 실패하였습니다.";
+        } else{
+
+            Movie modifiedMovie = targetMovie.toBuilder()
+                    .title(movieForm.getTitle())
+                    .summary(movieForm.getSummary())
+                    .grade(MovieGrade.valueOf(movieForm.getGrade()))
+                    .build();
+
+            movieRepository.save(modifiedMovie);
+
+            msg = "영화 수정에 성공하였습니다.";
+        }
+
+        resultMap.put("msg", msg);
+
+        return resultMap;
     }
 
 }

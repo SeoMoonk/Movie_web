@@ -1,11 +1,10 @@
 package com.seomoon.movieApp.boundedContext.movie.controller;
 
-import com.seomoon.movieApp.boundedContext.movie.model.MovieAddForm;
+import com.seomoon.movieApp.boundedContext.movie.model.MovieForm;
 import com.seomoon.movieApp.boundedContext.movie.model.entity.Movie;
 import com.seomoon.movieApp.boundedContext.movie.service.MovieService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,20 +30,20 @@ public class MovieController {
     }
 
     @GetMapping("/add")
-    public String getAddMovieForm(MovieAddForm movieAddForm) {
+    public String getAddMovieForm(MovieForm movieForm) {
 
         return "view/movie/movieAddForm";
     }
 
     @PostMapping("/add")
-    public String addMovie(@Valid MovieAddForm movieAddForm,
+    public String addMovie(@Valid MovieForm movieForm,
                            BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "view/movie/movieAddForm";
         }
 
-        movieService.addMovie(movieAddForm);
+        movieService.addMovie(movieForm);
 
         return "redirect:/movie/list";
     }
@@ -57,6 +56,28 @@ public class MovieController {
         model.addAttribute("movie", movie);
 
         return "/view/movie/movieDetail";
+    }
+
+    @GetMapping("/modify")
+    public String getModifyForm(@RequestParam(value="id") Long movieId, Model model,
+                                MovieForm movieForm) {
+
+        Movie movie = movieService.getMovieById(movieId);
+
+        model.addAttribute("movie", movie);
+
+        return "/view/movie/movieModifyForm";
+    }
+
+    @PostMapping("/modify")
+    public String modifyMovie(@RequestParam(value="id") Long movieId,
+                              @Valid MovieForm movieForm, BindingResult bindingResult) {
+
+        Movie targetMovie = movieService.getMovieById(movieId);
+
+        movieService.modifyMovie(movieForm, targetMovie);
+
+        return "redirect:/movie/detail?id=" + movieId;
     }
 
 }
