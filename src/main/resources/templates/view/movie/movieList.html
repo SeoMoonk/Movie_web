@@ -23,7 +23,7 @@
 
         <div th:unless="${#lists.isEmpty(movieList)}">
             <div th:each="movie:${movieList}">
-                <h1 th:text="${movie.title}"> </h1>
+                <a th:href="|/movie/detail?id=${movie.id}|" th:text="${movie.title}"> </a>
             </div>
         </div>
     </div>

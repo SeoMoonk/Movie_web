@@ -69,4 +69,10 @@ public class MovieService {
         return validCheckCode;
     }
 
+    public Movie getMovieById(Long movieId) {
+
+        //FIXME isPresent()
+        return movieRepository.findById(movieId).get();
+    }
+
 }

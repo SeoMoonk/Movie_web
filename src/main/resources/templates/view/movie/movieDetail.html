@@ -1,0 +1,42 @@
+<html xmlns:layout="" data-theme="corporate">
+<head>
+    <th:block th:replace="~{common/fragments/config :: ConfigFragment}"/>
+    <title>Main</title>
+</head>
+<body>
+<th:block th:replace="~{common/fragments/header :: HeaderFragment}"/>
+<main class="mt-32 w-full flex flex-col content-center justify-center">
+
+    <div class="hero bg-base-200">
+        <div class="hero-content flex-col lg:flex-row-reverse">
+            <div class="flex flex-col justify-center">
+                <img src="https://kr.object.ncloudstorage.com/calocheck/sample/sample_img_no.png"
+                     class="rounded-lg shadow-2xl"/>
+
+                <div sec:authorize="hasAuthority('admin')" class="flex flex-col mt-4 w-full justify-center items-center">
+                    <div>
+                        <a class="btn btn-success mr-4" th:href="|/movie/remove?id=${movie.id}|">영화 삭제</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col w-full">
+                <div class="flex flex-row">
+                    <h3 class="text-5xl font-bold mb-4" th:text="${movie.title}"></h3>
+                    <div class="inline-flex ml-2 mt-4 gap-2">
+                        <div class="badge badge-outline">
+                            <span th:text="${movie.grade.getGrade()}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <h1 class="text-2xl font-bold mb-4" th:text="${movie.summary}"></h1>
+                <p id="postContent" class="py-6"></p>
+            </div>
+        </div>
+    </div>
+
+</main>
+<th:block th:replace="~{common/fragments/footer :: FooterFragment}"/>
+</body>
+</html>
