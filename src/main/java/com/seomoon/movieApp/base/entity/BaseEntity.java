@@ -13,11 +13,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.time.LocalDateTime;
 
-@Entity
 @Getter
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
-@ToString(callSuper = true)
+@ToString
+@MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 
@@ -30,7 +30,5 @@ public class BaseEntity {
 
     @LastModifiedDate
     private LocalDateTime updateDate;
-
-
 
 }
