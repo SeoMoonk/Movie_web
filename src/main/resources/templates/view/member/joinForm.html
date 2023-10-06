@@ -32,14 +32,16 @@
             <input class="input input-bordered input-accent" type="text" id="nickname" name="nickname">
         </div>
 
-        <div class="flex">
+        <div class="flex flex-col">
 
             <div class="flex justify-center mt-8 mb-8" th:if="${#fields.hasErrors()}">
                 <h5 id="error" th:text="${#fields.errors()}" class="error-text"></h5>
             </div>
+            <div>
+                <button class="btn btn-info mx-6" type="submit">가입 완료</button>
+                <a class="btn btn-warning mx-6" href="/static">가입 취소</a>
+            </div>
 
-            <button class="btn btn-info mx-6" type="submit">가입 완료</button>
-            <a class="btn btn-warning mx-6" href="/static">가입 취소</a>
         </div>
 
     </form>

@@ -7,14 +7,12 @@
 <th:block th:replace="~{common/fragments/header :: HeaderFragment}"/>
 <main class="mt-32 w-full flex flex-col content-center justify-center">
 
-    <div sec:authorize="hasAuthority('admin')" class="flex flex-col w-full">
+    <div sec:authorize="hasAuthority('admin')" class="flex flex-col w-full justify-center items-center">
         <div>
-           <h1> --- 관리자 메뉴 --- </h1>
+           <h1 class="text-xl">Admin Menu</h1>
         </div>
         <div>
-            <a class="btn btn-outline btn-success mr-4" href="/movie/add">
-                (관리자) 영화 등록
-            </a>
+            <a class="btn btn-outline btn-success mr-4" href="/movie/add">영화 등록</a>
         </div>
     </div>
 

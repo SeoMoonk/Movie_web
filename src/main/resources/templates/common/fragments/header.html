@@ -15,6 +15,10 @@
         <div class="flex-none">
             <div class="flex justify-center">
 
+                <span sec:authorize="hasAuthority('admin')" class="font-bold text-xl mt-3 mr-4">관리자</span>
+                <span sec:authorize="hasAuthority('critic')" class="font-bold text-xl mt-3 mr-4">비평가</span>
+                <span sec:authorize="hasAuthority('user')" class="font-bold text-xl mt-3 mr-4">유저</span>
+
                 <a sec:authorize="!isAuthenticated()" class="btn btn-outline btn-warning mr-4" href="/member/join">
                     <h3>회원가입</h3>
                 </a>
@@ -25,10 +29,6 @@
 
                 <a sec:authorize="isAuthenticated()" class="btn btn-outline btn-primary mr-4" href="/member/logout">
                     <h3>로그아웃</h3>
-                </a>
-
-                <a sec:authorize="hasAuthority('admin')" class="btn btn-outline btn-success mr-4" href="/cafe/create">
-                    <h3>관리자</h3>
                 </a>
 
                 <a sec:authorize="hasAuthority('critic')" class="btn btn-outline btn-success mr-4" href="/cafe/create">
