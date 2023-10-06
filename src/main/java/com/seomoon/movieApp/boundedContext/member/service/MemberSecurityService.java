@@ -31,17 +31,22 @@ public class MemberSecurityService implements UserDetailsService {
             throw new UsernameNotFoundException("사용자를 찾을 수 없습니다.");
         }
 
-        Member boardUser = ObyUsername.get();
+        Member loginMember = ObyUsername.get();
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        if(username.contains("admin")) {
-            authorities.add(new SimpleGrantedAuthority(MemberGrade.ADMIN_USER.getGrade()));
+        if(loginMember.getGrade().equals(MemberGrade.ADMIN_USER)) {
+            System.out.println("어드민 로그인!");
+            authorities.add(new SimpleGrantedAuthority("admin"));
+        } else if(loginMember.getGrade().equals(MemberGrade.CRITIC_USER)) {
+            System.out.println("크리틱 로그인!");
+            authorities.add(new SimpleGrantedAuthority("critic"));
         } else {
-            authorities.add(new SimpleGrantedAuthority(MemberGrade.NORMAL_USER.getGrade()));
+            System.out.println("유저 로그인!");
+            authorities.add(new SimpleGrantedAuthority("user"));
         }
 
-        return new User(boardUser.getUsername(), boardUser.getPassword(), authorities);
+        return new User(loginMember.getUsername(), loginMember.getPassword(), authorities);
     }
 
 

@@ -32,11 +32,22 @@ public class MemberService {
         Map<String, String> checkJoinMap = checkValidJoin(username, password1, password2, nickname);
 
         if(checkJoinMap.get("code").startsWith("S")){
+
+            MemberGrade userGrade = null;
+
+            if(username.contains("admin")) {
+                userGrade = MemberGrade.ADMIN_USER;
+            } else if(username.contains("critic")) {
+                userGrade = MemberGrade.CRITIC_USER;
+            } else {
+                userGrade = MemberGrade.NORMAL_USER;
+            }
+
             Member member = Member.builder()
                     .username(username)
                     .password(passwordEncoder.encode(password1)) //TODO PasswordEncorder from security
                     .nickname(nickname)
-                    .grade(MemberGrade.NORMAL_USER)
+                    .grade(userGrade)
                     .build();
 
             memberRepository.save(member);
